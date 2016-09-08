@@ -2,14 +2,14 @@
   "scripts": {
     "test": "node ./node_modules/karma/bin/karma start ./karma.config.js --single-run --browsers PhantomJS",
     "test:watch": "node ./node_modules/karma/bin/karma start ./karma.config.js --auto-watch --browsers PhantomJS",
-    "cover": "http-server -c-1 -o -p 9875 ./build/coverage"
-
+    "postinstall": "typings install"
   },
   "name": "Angspa",
   "version": "0.0.0",
   "devDependencies": {
     "angular2-template-loader": "^0.5.0",
     "aspnet-webpack": "^1.0.6",
+    "babel-polyfill": "^6.13.0",
     "bundle-loader": "^0.5.2",
     "chai": "^2.2.0",
     "css-loader": "^0.23.1",
@@ -24,15 +24,19 @@
     "jasmine-core": "2.4.1",
     "jasmine-webpack-plugin": "^0.1.1",
     "jquery": "^2.2.1",
+    "json-loader": "^0.5.4",
     "karma": "0.13.19",
+    "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "0.2.2",
     "karma-coverage": "0.5.3",
-    "karma-jasmine": "0.3.6",
+    "karma-jasmine": "^0.3.6",
     "karma-mocha": "^0.1.10",
     "karma-phantomjs-launcher": "^0.1.4",
+    "karma-requirejs": "^1.0.0",
     "karma-spec-reporter": "0.0.18",
     "karma-typescript-preprocessor": "^0.2.1",
     "karma-webpack": "^1.8.0",
+    "mocha": "^3.0.2",
     "node-sass": "^3.9.3",
     "phantomjs-polyfill": "0.0.1",
     "raw-loader": "^0.5.1",

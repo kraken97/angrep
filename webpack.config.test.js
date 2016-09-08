@@ -13,9 +13,12 @@ module.exports = merge({
     },
     module: {
         loaders: [
-            { test: /\.ts$/, include: /ClientApp/, loader: 'ts-loader?silent=true' },
+            { test: /\.ts$/,  loaders:[ 'ts-loader','angular2-template-loader'] },
             { test: /\.html$/, loader: 'raw-loader' },
-            { test: /\.css/, loader: extractCSS.extract(['css']) }
+            { test: /\.css$/, loader: 'raw-loader' },
+            { test: /\.scss/, loaders: ['raw-loader', 'sass-loader']  },
+            { test: /\.json/, loaders: ['json-loader']  }
+            
         ]
     },
     entry: {
@@ -27,10 +30,5 @@ module.exports = merge({
         publicPath: '/dist/'
     },
     plugins: [
-        extractCSS,
-        new webpack.DllReferencePlugin({
-            context: __dirname,
-            manifest: require('./wwwroot/dist/vendor-manifest.json')
-        })
     ]
 });

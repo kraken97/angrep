@@ -28,7 +28,7 @@ Obj/
 
 # Visual Studio 2015 cache/options directory
 .vs/
-/wwwroot/dist/
+
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
@@ -238,13 +238,9 @@ _Pvt_Extensions
 
 
 
-typings
 
 obj
 bin
 build
 coverage
 
-
-wwwroot/**/*.css
-wwwroot/**/*.js
