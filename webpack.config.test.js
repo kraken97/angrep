@@ -1,34 +1,36 @@
-var webpackConfig = require('./webpack.config.js');
-webpackConfig.entry = {};
+var path = require('path');
+var webpack = require('webpack');
+var merge = require('extendify')({ isDeep: true, arrays: 'concat' });
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var extractCSS = new ExtractTextPlugin('styles.css');
+var devConfig = require('./webpack.config.dev');
+var prodConfig = require('./webpack.config.prod');
+var isDevelopment = process.env.ASPNETCORE_ENVIRONMENT === 'Development';
 
-module.exports = function(config) {
-  config.set({
-    basePath: '',
-    frameworks: ['jasmine', 'chai'],
-
-    reporters: ['progress'],
-    port: 9876,
-    colors: false,
-    logLevel: config.LOG_INFO,
-    autoWatch: true,
-    browsers: ['Chrome'],
-    singleRun: false,
-    autoWatchBatchDelay: 300,
-
-    files: [
-      './app/bundle.js',
-      './node_modules/angular-mocks/angular-mocks.js',
-      './tests/**/*.js'],
-
-    preprocessors: {
-      './ClientApp/boot-client.js': ['webpack'],      
-      './tests/**/*.spec.js': ['babel']
+module.exports = merge({
+    resolve: {
+        extensions: [ '', '.js', '.ts' ]
     },
-
-    webpack: webpackConfig,
-
-    webpackMiddleware: {
-      noInfo: true
-    }
-  });
-}
+    module: {
+        loaders: [
+            { test: /\.ts$/, include: /ClientApp/, loader: 'ts-loader?silent=true' },
+            { test: /\.html$/, loader: 'raw-loader' },
+            { test: /\.css/, loader: extractCSS.extract(['css']) }
+        ]
+    },
+    entry: {
+        main: ['./ClientApp/boot-client.ts']
+    },
+    output: {
+        path: path.join(__dirname, 'wwwroot', 'dist'),
+        filename: '[name].js',
+        publicPath: '/dist/'
+    },
+    plugins: [
+        extractCSS,
+        new webpack.DllReferencePlugin({
+            context: __dirname,
+            manifest: require('./wwwroot/dist/vendor-manifest.json')
+        })
+    ]
+});

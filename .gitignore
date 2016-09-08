@@ -235,3 +235,16 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+
+
+
+typings
+
+obj
+bin
+build
+coverage
+
+
+wwwroot/**/*.css
+wwwroot/**/*.js
