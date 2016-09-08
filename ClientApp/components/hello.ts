@@ -3,7 +3,7 @@ import {Component} from '@angular/core';
 @Component({
   selector: 'App',
   template: require('./hello.html'),
-  styleUrls:['./hello.scss']
+  styles:[require('./hello.scss')]
 })
 export class Hello {
   public hello: string;

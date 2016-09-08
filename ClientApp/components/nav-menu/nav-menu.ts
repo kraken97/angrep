@@ -4,7 +4,8 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 @ng.Component({
   selector: 'nav-menu',
   template: require('./nav-menu.html'),
-  directives: [...ROUTER_DIRECTIVES]
+  directives: [...ROUTER_DIRECTIVES],
+  styles:[require('./nav-menu.scss')]
 })
 export class NavMenu {
 }
