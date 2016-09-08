@@ -16,7 +16,7 @@ module.exports = function(config) {
         },
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: './',
-    frameworks: ['jasmine'],
+    frameworks: ['mocha','chai'],
     files: [
     { pattern: 'node_modules/babel-polyfill/browser.js', instrument: false},
       './ClientApp/**/*.spec.ts'
