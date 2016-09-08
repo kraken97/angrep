@@ -2,7 +2,8 @@ var path = require('path');
 var webpack = require('webpack');
 var merge = require('extendify')({ isDeep: true, arrays: 'concat' });
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var extractCSS = new ExtractTextPlugin('styles.css');
+//TODO READ ABOUT this
+// var extractCSS = new ExtractTextPlugin('styles.css');
 var devConfig = require('./webpack.config.dev');
 var prodConfig = require('./webpack.config.prod');
 var isDevelopment = process.env.ASPNETCORE_ENVIRONMENT === 'Development';
@@ -13,11 +14,10 @@ module.exports = merge({
     },
     module: {
         loaders: [
-            { test: /\.ts$/,  loaders:[ 'ts-loader','angular2-template-loader'] },
+            { test: /\.ts$/, include: /ClientApp/, loaders:['ts-loader?silent=true']},
             { test: /\.html$/, loader: 'raw-loader' },
-            { test: /\.css$/, loader: 'raw-loader' },
-            { test: /\.scss/, loaders: ['raw-loader', 'sass-loader']  }
-
+            // { test: /\.css/, loader: extractCSS.extract(['css']) },
+            { test: /\.scss/, loaders:['raw-loader','sass-loader'] }
         ]
     },
     entry: {
@@ -29,7 +29,7 @@ module.exports = merge({
         publicPath: '/dist/'
     },
     plugins: [
-        extractCSS,
+        // extractCSS,
         new webpack.DllReferencePlugin({
             context: __dirname,
             manifest: require('./wwwroot/dist/vendor-manifest.json')

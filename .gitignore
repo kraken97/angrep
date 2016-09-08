@@ -244,3 +244,7 @@ bin
 build
 coverage
 
+.vscode
+
+
+wwwroot/dist

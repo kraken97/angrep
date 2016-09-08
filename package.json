@@ -1,11 +1,10 @@
 {
   "scripts": {
-    "test": "node ./node_modules/karma/bin/karma start ./karma.config.js --single-run --browsers PhantomJS",
+    "test": "node ./node_modules/karma/bin/karma start ./karma.config.js --single-run --browsers Chrome",
     "test:watch": "node ./node_modules/karma/bin/karma start ./karma.config.js --auto-watch --browsers PhantomJS",
     "typings": "typings install",
-    "postinstall":"typings",
-    "build":"webpack --config webpack.config.js & webpack --config webpack.config.vendor.js"
-
+    "postinstall": "typings",
+    "build": "webpack --config webpack.config.js & webpack --config webpack.config.vendor.js"
   },
   "name": "Angspa",
   "version": "0.0.0",
