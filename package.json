@@ -1,15 +1,15 @@
 {
   "scripts": {
     "test": "node ./node_modules/karma/bin/karma start ./karma.config.js --single-run --browsers PhantomJS",
-    "test:watch": "node ./node_modules/karma/bin/karma start ./karma.config.js --auto-watch --browsers PhantomJS"
+    "test:watch": "node ./node_modules/karma/bin/karma start ./karma.config.js --auto-watch --browsers PhantomJS",
+    "cover": "http-server -c-1 -o -p 9875 ./build/coverage"
+
   },
   "name": "Angspa",
   "version": "0.0.0",
   "devDependencies": {
     "angular2-template-loader": "^0.5.0",
     "aspnet-webpack": "^1.0.6",
-    "awesome-typescript-loader": "^2.2.4",
-    "bootstrap": "^3.3.6",
     "bundle-loader": "^0.5.2",
     "chai": "^2.2.0",
     "css-loader": "^0.23.1",
@@ -33,8 +33,6 @@
     "karma-spec-reporter": "0.0.18",
     "karma-typescript-preprocessor": "^0.2.1",
     "karma-webpack": "^1.8.0",
-    "mocha": "^2.2.1",
-    "mocha-loader": "^0.7.1",
     "node-sass": "^3.9.3",
     "phantomjs-polyfill": "0.0.1",
     "raw-loader": "^0.5.1",
