@@ -10,8 +10,8 @@ module.exports = {
     },
     module: {
         loaders: [
-            { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' },
-            { test: /\.css/, loaders:['style-loader','css-loader'] },
+            { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' }
+            // { test: /\.css/, loader: extractCSS.extract(['css']) }
         ]
     },
     entry: {
@@ -35,7 +35,6 @@ module.exports = {
         library: '[name]_[hash]',
     },
     plugins: [
-        // extractCSS,
         new webpack.ProvidePlugin({ $: 'jquery', jQuery: 'jquery' }), // Maps these identifiers to the jQuery package (because Bootstrap expects it to be a global variable)
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.DllPlugin({
