@@ -2,11 +2,28 @@ var path = require('path');
 var webpack = require('webpack');
 var merge = require('extendify')({ isDeep: true, arrays: 'concat' });
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-//TODO READ ABOUT this
-// var extractCSS = new ExtractTextPlugin('styles.css');
-var devConfig = require('./webpack.config.dev');
-var prodConfig = require('./webpack.config.prod');
+var extractCSS = new ExtractTextPlugin('styles.css');
+
 var isDevelopment = process.env.ASPNETCORE_ENVIRONMENT === 'Development';
+
+var devConfig= {
+    devtool: 'inline-source-map'
+};
+
+
+var prodConfig={
+    plugins: [
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: { warnings: false },
+            minimize: true,
+            mangle: false // Due to https://github.com/angular/angular/issues/6678
+        })
+    ]
+};
+
+
+
 
 module.exports = merge({
     resolve: {
@@ -14,15 +31,14 @@ module.exports = merge({
     },
     module: {
         loaders: [
-            { test: /\.ts$/, include: /ClientApp/, loaders:['ts-loader?silent=true']},
+            { test: /\.ts$/, include: /ClientApp/, loader: 'ts-loader?silent=true' },
             { test: /\.html$/, loader: 'raw-loader' },
-            // { test: /\.css/, loader: extractCSS.extract(['css']) },
-            { test: /\.scss/, loaders:['raw-loader','sass-loader'] }
+            { test: /\.css/, loader: 'raw-loader' }
         ]
     },
     entry: {
         main: ['./ClientApp/boot-client.ts'],
-        vendor2:['./ClientApp/vendor2.ts']
+        vendor: ['./ClientApp/vendor.ts'],
     },
     output: {
         path: path.join(__dirname, 'wwwroot', 'dist'),
@@ -30,10 +46,7 @@ module.exports = merge({
         publicPath: '/dist/'
     },
     plugins: [
-         new webpack.optimize.CommonsChunkPlugin({
-      name: ['main', 'vendor2']
-    }),
-        // // extractCSS,
+        // extractCSS,
         // new webpack.DllReferencePlugin({
         //     context: __dirname,
         //     manifest: require('./wwwroot/dist/vendor-manifest.json')

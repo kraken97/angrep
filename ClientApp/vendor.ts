@@ -13,5 +13,5 @@ import '@angular/platform-server';
 import 'rxjs';
 
 
-import 'style-loader'
+
 import 'jquery'
