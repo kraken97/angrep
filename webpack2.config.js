@@ -21,9 +21,7 @@ module.exports = merge({
         ]
     },
     entry: {
-        main: ['./ClientApp/boot-client.ts'],
-        vendor2:['./ClientApp/vendor2.ts']
-    
+        main: ['./ClientApp/boot-client.ts']
     },
     output: {
         path: path.join(__dirname, 'wwwroot', 'dist'),
@@ -31,13 +29,10 @@ module.exports = merge({
         publicPath: '/dist/'
     },
     plugins: [
-         new webpack.optimize.CommonsChunkPlugin({
-      name: ['main', 'vendor2']
-    }),
-        // // extractCSS,
-        // new webpack.DllReferencePlugin({
-        //     context: __dirname,
-        //     manifest: require('./wwwroot/dist/vendor-manifest.json')
-        // })
+        // extractCSS,
+        new webpack.DllReferencePlugin({
+            context: __dirname,
+            manifest: require('./wwwroot/dist/vendor-manifest.json')
+        })
     ]
 }, isDevelopment ? devConfig : prodConfig);

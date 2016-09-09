@@ -12,6 +12,8 @@ describe("A suite is just a function", function() {
     
     var a = true;
 
+
+
     expect('hello').to.be.eq('hello');
   });
 });

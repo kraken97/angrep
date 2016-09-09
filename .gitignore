@@ -247,4 +247,4 @@ coverage
 .vscode
 
 
-wwwroot/dist
+wwwroot
